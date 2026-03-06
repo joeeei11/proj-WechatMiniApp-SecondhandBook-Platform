@@ -52,8 +52,10 @@ Page({
                 bookId ? this.loadBookInfo(bookId) : Promise.resolve()
             ])
 
+            // 确保 nickName 不为空，依次取：云函数返回 → URL参数 → 默认值
+            const resolvedName = (otherUser && otherUser.nickName) || nickName || '用户'
             this.setData({
-                otherUser: otherUser || { nickName: nickName || '用户' },
+                otherUser: { ...(otherUser || {}), nickName: resolvedName },
                 myInfo: myInfo || {},
                 loading: false
             })
