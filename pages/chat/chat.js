@@ -22,12 +22,15 @@ Page({
     },
 
     async onLoad(options) {
-        const { userId, bookId, bookTitle, nickName } = options
+        const userId = options.userId
+        const bookId = options.bookId || ''
+        const bookTitle = options.bookTitle ? decodeURIComponent(options.bookTitle) : ''
+        const nickName = options.nickName ? decodeURIComponent(options.nickName) : ''
         const app = getApp()
 
         // 获取状态栏高度
-        const sysInfo = wx.getSystemInfoSync()
-        this.setData({ statusBarHeight: sysInfo.statusBarHeight || 20 })
+        const windowInfo = wx.getWindowInfo()
+        this.setData({ statusBarHeight: windowInfo.statusBarHeight || 20 })
 
         if (!app.globalData.openid) {
             wx.showToast({ title: '请先登录', icon: 'none' })
@@ -38,7 +41,7 @@ Page({
         // 先设置临时显示名称
         this.setData({
             otherUserId: userId,
-            bookId: bookId || '',
+            bookId,
             myId: app.globalData.openid,
             otherUser: { nickName: nickName || bookTitle || '加载中...' }
         })

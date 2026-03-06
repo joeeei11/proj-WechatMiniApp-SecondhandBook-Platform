@@ -169,7 +169,7 @@ Page({
         // 重置滑动状态
         this.resetAllSlides()
         wx.navigateTo({
-            url: `/pages/chat/chat?userId=${userId}&nickName=${encodeURIComponent(nickName || '用户')}`
+            url: `/pages/chat/chat?userId=${userId}&nickName=${nickName || '用户'}`
         })
     }
 })

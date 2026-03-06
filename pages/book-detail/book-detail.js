@@ -79,7 +79,7 @@ Page({
         }
         const sellerName = this.data.seller ? (this.data.seller.nickName || '') : ''
         wx.navigateTo({
-            url: `/pages/chat/chat?userId=${book.sellerId}&bookId=${this.data.bookId}&bookTitle=${encodeURIComponent(book.title || '')}&nickName=${encodeURIComponent(sellerName)}`
+            url: `/pages/chat/chat?userId=${book.sellerId}&bookId=${this.data.bookId}&bookTitle=${book.title || ''}&nickName=${sellerName}`
         })
     },
 
