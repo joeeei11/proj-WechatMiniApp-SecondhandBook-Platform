@@ -145,7 +145,10 @@
 .msg-list {
   flex: 1;
   height: 0;
-  padding: 16rpx 32rpx;
+}
+
+.msg-list-inner {
+  padding: 16rpx 24rpx;
 }
 
 .empty-chat {

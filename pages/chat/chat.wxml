@@ -40,59 +40,61 @@
     enhanced
     show-scrollbar="{{false}}"
   >
-    <view wx:if="{{messages.length === 0 && !loading}}" class="empty-chat">
-      <view class="empty-chat-icon">💬</view>
-      <text class="empty-chat-text">和{{otherUser.nickName || 'TA'}}打个招呼吧～</text>
+    <view class="msg-list-inner">
+      <view wx:if="{{messages.length === 0 && !loading}}" class="empty-chat">
+        <view class="empty-chat-icon">💬</view>
+        <text class="empty-chat-text">和{{otherUser.nickName || 'TA'}}打个招呼吧～</text>
+      </view>
+
+      <block wx:for="{{messages}}" wx:key="_id">
+        <!-- 时间分隔符 -->
+        <view wx:if="{{item.showTime}}" class="time-divider">
+          <text class="time-divider-text">{{item.timeStr}}</text>
+        </view>
+
+        <!-- 消息项 -->
+        <view
+          id="msg-{{index}}"
+          class="msg-item {{item.senderId === myId ? 'msg-right' : 'msg-left'}}"
+        >
+          <!-- 对方消息 -->
+          <block wx:if="{{item.senderId !== myId}}">
+            <image class="msg-avatar" src="{{otherUser.avatarUrl || '/assets/images/default-avatar.png'}}" mode="aspectFill" bindtap="goUserProfile" />
+            <view class="msg-content-wrap">
+              <!-- 文本消息 -->
+              <view wx:if="{{item.type !== 'image'}}" class="msg-bubble msg-bubble-left">
+                <text class="msg-text">{{item.content}}</text>
+              </view>
+              <!-- 图片消息 -->
+              <view wx:else class="msg-img-wrap" bindtap="previewChatImage" data-src="{{item.content}}">
+                <image class="msg-image" src="{{item.content}}" mode="widthFix" />
+              </view>
+            </view>
+          </block>
+
+          <!-- 我的消息 -->
+          <block wx:if="{{item.senderId === myId}}">
+            <image class="msg-avatar" src="{{myInfo.avatarUrl || '/assets/images/default-avatar.png'}}" mode="aspectFill" />
+            <view class="msg-content-wrap">
+              <!-- 发送状态指示 -->
+              <view wx:if="{{item.sending}}" class="msg-sending">
+                <view class="spinner spinner-sm"></view>
+              </view>
+              <!-- 文本消息 -->
+              <view wx:if="{{item.type !== 'image'}}" class="msg-bubble msg-bubble-right">
+                <text class="msg-text">{{item.content}}</text>
+              </view>
+              <!-- 图片消息 -->
+              <view wx:else class="msg-img-wrap" bindtap="previewChatImage" data-src="{{item.content}}">
+                <image class="msg-image" src="{{item.content}}" mode="widthFix" />
+              </view>
+            </view>
+          </block>
+        </view>
+      </block>
+
+      <view id="msg-bottom" style="height:20rpx;"></view>
     </view>
-
-    <block wx:for="{{messages}}" wx:key="_id">
-      <!-- 时间分隔符 -->
-      <view wx:if="{{item.showTime}}" class="time-divider">
-        <text class="time-divider-text">{{item.timeStr}}</text>
-      </view>
-
-      <!-- 消息项 -->
-      <view
-        id="msg-{{index}}"
-        class="msg-item {{item.senderId === myId ? 'msg-right' : 'msg-left'}}"
-      >
-        <!-- 对方消息 -->
-        <block wx:if="{{item.senderId !== myId}}">
-          <image class="msg-avatar" src="{{otherUser.avatarUrl || '/assets/images/default-avatar.png'}}" mode="aspectFill" bindtap="goUserProfile" />
-          <view class="msg-content-wrap">
-            <!-- 文本消息 -->
-            <view wx:if="{{item.type !== 'image'}}" class="msg-bubble msg-bubble-left">
-              <text class="msg-text">{{item.content}}</text>
-            </view>
-            <!-- 图片消息 -->
-            <view wx:else class="msg-img-wrap" bindtap="previewChatImage" data-src="{{item.content}}">
-              <image class="msg-image" src="{{item.content}}" mode="widthFix" />
-            </view>
-          </view>
-        </block>
-
-        <!-- 我的消息 -->
-        <block wx:if="{{item.senderId === myId}}">
-          <image class="msg-avatar" src="{{myInfo.avatarUrl || '/assets/images/default-avatar.png'}}" mode="aspectFill" />
-          <view class="msg-content-wrap">
-            <!-- 发送状态指示 -->
-            <view wx:if="{{item.sending}}" class="msg-sending">
-              <view class="spinner spinner-sm"></view>
-            </view>
-            <!-- 文本消息 -->
-            <view wx:if="{{item.type !== 'image'}}" class="msg-bubble msg-bubble-right">
-              <text class="msg-text">{{item.content}}</text>
-            </view>
-            <!-- 图片消息 -->
-            <view wx:else class="msg-img-wrap" bindtap="previewChatImage" data-src="{{item.content}}">
-              <image class="msg-image" src="{{item.content}}" mode="widthFix" />
-            </view>
-          </view>
-        </block>
-      </view>
-    </block>
-
-    <view id="msg-bottom" style="height:20rpx;"></view>
   </scroll-view>
 
   <!-- 底部输入栏（精致微信风格） -->
