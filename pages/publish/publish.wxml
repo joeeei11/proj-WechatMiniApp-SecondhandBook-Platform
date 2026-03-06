@@ -1,0 +1,139 @@
+<!-- pages/publish/publish.wxml - 发布/编辑书籍页 -->
+<view class="page-container">
+  <!-- 书籍封面/图片 -->
+  <view class="card">
+    <text class="form-label">书籍图片 <text class="required">*</text></text>
+    <view class="image-grid">
+      <view
+        wx:for="{{imageList}}"
+        wx:key="index"
+        class="image-item"
+      >
+        <image class="preview-img" src="{{item}}" mode="aspectFill" />
+        <view class="remove-btn" catchtap="removeImage" data-index="{{index}}">✕</view>
+      </view>
+      <view class="add-image-btn" bindtap="chooseImage" wx:if="{{imageList.length < 9}}">
+        <text class="add-icon">+</text>
+        <text class="add-text">添加图片</text>
+        <text class="add-count text-secondary text-xs">{{imageList.length}}/9</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="card">
+    <text class="section-title">基本信息</text>
+    <view class="form-item">
+      <text class="form-label">书名 <text class="required">*</text></text>
+      <input
+        class="form-input"
+        placeholder="请输入书名"
+        value="{{form.title}}"
+        bindinput="onInput"
+        data-field="title"
+        maxlength="50"
+      />
+    </view>
+    <view class="form-item">
+      <text class="form-label">作者</text>
+      <input
+        class="form-input"
+        placeholder="请输入作者（可选）"
+        value="{{form.author}}"
+        bindinput="onInput"
+        data-field="author"
+        maxlength="30"
+      />
+    </view>
+    <view class="form-item">
+      <text class="form-label">ISBN</text>
+      <input
+        class="form-input"
+        placeholder="扫码或手动输入ISBN（可选）"
+        value="{{form.isbn}}"
+        bindinput="onInput"
+        data-field="isbn"
+        type="number"
+        maxlength="13"
+      />
+    </view>
+  </view>
+
+  <!-- 交易信息 -->
+  <view class="card">
+    <text class="section-title">交易信息</text>
+    <view class="form-item">
+      <text class="form-label">定价 <text class="required">*</text></text>
+      <view class="price-input-wrap">
+        <text class="currency">¥</text>
+        <input
+          class="form-input price-input"
+          placeholder="0.00"
+          value="{{form.price}}"
+          bindinput="onInput"
+          data-field="price"
+          type="digit"
+        />
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">书籍成色 <text class="required">*</text></text>
+      <view class="condition-grid">
+        <view
+          wx:for="{{conditions}}"
+          wx:key="value"
+          class="condition-tag {{form.condition === item.value ? 'active' : ''}}"
+          bindtap="selectCondition"
+          data-value="{{item.value}}"
+        >{{item.label}}</view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">所属学院</text>
+      <picker mode="selector" range="{{colleges}}" bindchange="selectCollege">
+        <view class="picker-view">
+          <text class="{{form.college ? '' : 'text-secondary'}}">
+            {{form.college || '请选择学院（可选）'}}
+          </text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">适用年级</text>
+      <picker mode="selector" range="{{grades}}" bindchange="selectGrade">
+        <view class="picker-view">
+          <text class="{{form.grade ? '' : 'text-secondary'}}">
+            {{form.grade ? form.grade + '级' : '请选择年级（可选）'}}
+          </text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 书籍描述 -->
+  <view class="card">
+    <text class="form-label">补充说明</text>
+    <textarea
+      class="form-textarea"
+      placeholder="描述书籍的品相、是否有笔记划线等（可选）"
+      value="{{form.description}}"
+      bindinput="onInput"
+      data-field="description"
+      maxlength="300"
+      auto-height
+    />
+    <text class="char-count text-xs text-secondary">{{form.description.length || 0}}/300</text>
+  </view>
+
+  <!-- 提交按钮 -->
+  <button class="submit-btn" bindtap="submitForm" disabled="{{submitting}}">
+    {{submitting ? '发布中...' : (isEdit ? '保存修改' : '发布书籍')}}
+  </button>
+
+  <view class="safe-bottom"></view>
+</view>

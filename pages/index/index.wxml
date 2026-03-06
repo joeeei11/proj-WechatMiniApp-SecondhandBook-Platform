@@ -1,0 +1,93 @@
+<!-- pages/index/index.wxml - 首页 -->
+<view class="page-container" style="padding: 0;">
+  <!-- 搜索栏区域 -->
+  <view class="header-search">
+    <view class="search-bar" bindtap="goSearch">
+      <text class="search-icon">🔍</text>
+      <text class="search-placeholder">搜索书名、作者、ISBN...</text>
+    </view>
+  </view>
+
+  <!-- 学院筛选横向滚动 -->
+  <scroll-view class="college-filter" scroll-x enable-flex>
+    <view
+      class="college-tag {{selectedCollege === '' ? 'active' : ''}}"
+      bindtap="filterCollege"
+      data-college=""
+    >全部</view>
+    <view
+      wx:for="{{colleges}}"
+      wx:key="*this"
+      class="college-tag {{selectedCollege === item ? 'active' : ''}}"
+      bindtap="filterCollege"
+      data-college="{{item}}"
+    >{{item}}</view>
+  </scroll-view>
+
+  <!-- 骨架屏加载 -->
+  <view class="skeleton-grid" wx:if="{{loading}}">
+    <view class="skeleton-card" wx:for="{{[1,2,3,4]}}" wx:key="*this">
+      <view class="skeleton-cover skeleton"></view>
+      <view class="skeleton-info">
+        <view class="skeleton-title skeleton"></view>
+        <view class="skeleton-tag skeleton"></view>
+        <view class="skeleton-price skeleton"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 书籍列表 -->
+  <view class="books-grid" wx:if="{{!loading && books.length > 0}}">
+    <view
+      wx:for="{{books}}"
+      wx:key="_id"
+      class="book-card"
+      bindtap="goBookDetail"
+      data-id="{{item._id}}"
+    >
+      <!-- 书籍封面 -->
+      <view class="book-cover-wrap">
+        <image
+          class="book-cover"
+          src="{{item.coverImage || '/assets/images/book-placeholder.png'}}"
+          mode="aspectFill"
+          lazy-load
+        />
+        <view class="book-status-badge {{item.status}}" wx:if="{{item.status !== 'on_sale'}}">
+          {{item.status === 'sold' ? '已售' : '交易中'}}
+        </view>
+      </view>
+
+      <!-- 书籍信息 -->
+      <view class="book-info">
+        <text class="book-title text-ellipsis-2">{{item.title}}</text>
+        <view class="book-meta">
+          <text class="book-condition tag">{{conditionMap[item.condition]}}</text>
+        </view>
+        <view class="book-footer flex-between">
+          <view>
+            <text class="price-symbol">¥</text>
+            <text class="price">{{item.price}}</text>
+          </view>
+          <text class="book-college text-xs text-secondary">{{item.college}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && books.length === 0}}">
+    <image class="empty-icon" src="/assets/images/empty-books.png" />
+    <text class="empty-text">暂无书籍</text>
+    <button class="empty-action" bindtap="goPublish">去发布</button>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{loadingMore}}">
+    <view class="spinner spinner-sm"></view>
+    <text>加载中...</text>
+  </view>
+  <view class="no-more" wx:if="{{!hasMore && books.length > 0}}">
+    <text>—— 已加载全部 ——</text>
+  </view>
+</view>

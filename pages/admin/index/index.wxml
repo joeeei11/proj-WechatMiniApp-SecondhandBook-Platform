@@ -1,0 +1,56 @@
+<!-- pages/admin/index/index.wxml -->
+<view class="page-container admin-page">
+  <view class="admin-header">
+    <text class="admin-title">📊 管理后台</text>
+  </view>
+
+  <!-- 数据概览 -->
+  <view class="stats-grid">
+    <view class="stat-card">
+      <text class="stat-value">{{stats.totalUsers}}</text>
+      <text class="stat-label">总用户数</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-value">{{stats.activeBooks}}</text>
+      <text class="stat-label">在售书籍</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-value">{{stats.totalBooks}}</text>
+      <text class="stat-label">总书籍数</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-value">{{stats.totalOrders}}</text>
+      <text class="stat-label">总订单数</text>
+    </view>
+  </view>
+
+  <!-- 管理功能入口 -->
+  <view class="menu-section">
+    <view class="menu-card" bindtap="goBooks">
+      <text class="menu-icon">📚</text>
+      <view class="menu-content">
+        <text class="menu-title">书籍管理</text>
+        <text class="menu-desc text-sm text-secondary">审核、下架违规书籍</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-card" bindtap="goUsers">
+      <text class="menu-icon">👥</text>
+      <view class="menu-content">
+        <text class="menu-title">用户管理</text>
+        <text class="menu-desc text-sm text-secondary">查看用户、处理投诉</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-card" bindtap="goStats">
+      <text class="menu-icon">📈</text>
+      <view class="menu-content">
+        <text class="menu-title">数据统计</text>
+        <text class="menu-desc text-sm text-secondary">交易量、活跃数据分析</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+</view>

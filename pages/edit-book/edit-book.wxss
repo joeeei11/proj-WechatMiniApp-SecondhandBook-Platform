@@ -1,0 +1,2 @@
+/* pages/edit-book/edit-book.wxss - 复用 publish 样式 */
+@import "../publish/publish.wxss";

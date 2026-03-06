@@ -1,0 +1,15 @@
+<!-- components/book-card/book-card.wxml -->
+<view class="book-card" bindtap="onTap">
+  <image class="book-card-img" src="{{book.images[0] || '/assets/images/book-placeholder.png'}}" mode="aspectFill" />
+  <view class="book-card-info">
+    <text class="book-card-title">{{book.title}}</text>
+    <text class="book-card-author">{{book.author}}</text>
+    <view class="book-card-bottom">
+      <text class="book-card-price">¥{{book.price}}</text>
+      <text class="book-card-tag">{{conditionMap[book.condition] || book.condition}}</text>
+    </view>
+    <view wx:if="{{showStatus}}" class="book-card-status" style="color:{{statusMap[book.status].color}}">
+      {{statusMap[book.status].text}}
+    </view>
+  </view>
+</view>

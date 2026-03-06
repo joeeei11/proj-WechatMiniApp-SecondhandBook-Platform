@@ -1,0 +1,5 @@
+.empty-state-wrap { display: flex; flex-direction: column; align-items: center; padding: 150rpx 40rpx; }
+.empty-icon { font-size: 100rpx; margin-bottom: 24rpx; }
+.empty-text { font-size: 28rpx; color: #999; }
+.empty-sub { font-size: 24rpx; color: #bbb; margin-top: 8rpx; }
+.empty-btn { margin-top: 40rpx; }

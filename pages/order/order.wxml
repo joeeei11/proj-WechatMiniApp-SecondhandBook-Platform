@@ -1,0 +1,89 @@
+<!-- pages/order/order.wxml - 订单列表/详情页 -->
+<view class="page-container">
+  <!-- Tab切换 -->
+  <view class="tab-bar">
+    <view
+      class="tab-item {{activeTab === 'buy' ? 'active' : ''}}"
+      bindtap="switchTab"
+      data-tab="buy"
+    >我购买的</view>
+    <view
+      class="tab-item {{activeTab === 'sell' ? 'active' : ''}}"
+      bindtap="switchTab"
+      data-tab="sell"
+    >我出售的</view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="spinner"></view>
+    <text class="text-secondary text-sm">加载中...</text>
+  </view>
+
+  <!-- 订单列表 -->
+  <view wx:elif="{{orders.length > 0}}">
+    <view
+      wx:for="{{orders}}"
+      wx:key="_id"
+      class="order-card"
+    >
+      <!-- 书籍信息 -->
+      <view class="order-book flex" bindtap="goBookDetail" data-id="{{item.bookId}}">
+        <image class="order-book-img" src="{{item.bookCoverImage || '/assets/images/book-placeholder.png'}}" mode="aspectFill" />
+        <view class="order-book-info">
+          <text class="order-book-title text-ellipsis">{{item.bookTitle || '书籍'}}</text>
+          <text class="text-danger">¥{{item.price}}</text>
+        </view>
+      </view>
+
+      <!-- 订单状态 -->
+      <view class="order-meta flex-between">
+        <text class="text-xs text-secondary">{{item.createTimeStr}}</text>
+        <view class="status-badge" style="color:{{item.statusInfo.color}}">
+          {{item.statusInfo.text}}
+        </view>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="order-actions" wx:if="{{item.status !== 'cancelled'}}">
+        <!-- 买家操作 -->
+        <block wx:if="{{activeTab === 'buy'}}">
+          <button class="action-btn" bindtap="contactSeller" data-seller-id="{{item.sellerId}}" data-book-id="{{item.bookId}}">
+            联系卖家
+          </button>
+          <button
+            class="action-btn btn-danger-sm"
+            bindtap="cancelOrder"
+            data-order-id="{{item._id}}"
+            wx:if="{{item.status === 'pending'}}"
+          >取消订单</button>
+          <button
+            class="action-btn btn-primary-sm"
+            bindtap="goReview"
+            data-order-id="{{item._id}}"
+            data-reviewee-id="{{item.sellerId}}"
+            wx:if="{{item.status === 'completed' && !item.reviewed}}"
+          >评价卖家</button>
+        </block>
+
+        <!-- 卖家操作 -->
+        <block wx:if="{{activeTab === 'sell'}}">
+          <button class="action-btn" bindtap="contactBuyer" data-buyer-id="{{item.buyerId}}" data-book-id="{{item.bookId}}">
+            联系买家
+          </button>
+          <button
+            class="action-btn btn-primary-sm"
+            bindtap="confirmOrder"
+            data-order-id="{{item._id}}"
+            data-book-id="{{item.bookId}}"
+            wx:if="{{item.status === 'pending' || item.status === 'confirmed'}}"
+          >确认完成</button>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:elif="{{orders.length === 0}}">
+    <text class="text-secondary">暂无订单记录</text>
+  </view>
+</view>

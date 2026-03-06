@@ -1,0 +1,64 @@
+<!-- pages/chat/chat.wxml - 聊天页面 -->
+<view class="chat-page">
+  <!-- 书籍信息卡片（聊天上下文） -->
+  <view class="book-context" wx:if="{{bookInfo}}" bindtap="goBookDetail">
+    <image class="book-thumb" src="{{bookInfo.coverImage || '/assets/images/book-placeholder.png'}}" mode="aspectFill" />
+    <view class="book-context-info">
+      <text class="book-context-title text-ellipsis">{{bookInfo.title}}</text>
+      <text class="text-danger text-sm">¥{{bookInfo.price}}</text>
+    </view>
+    <text class="text-secondary" style="font-size:32rpx;">›</text>
+  </view>
+
+  <!-- 聊天消息列表 -->
+  <scroll-view
+    class="msg-list"
+    scroll-y
+    scroll-into-view="{{scrollToId}}"
+    scroll-with-animation
+  >
+    <view wx:if="{{messages.length === 0}}" class="empty-chat">
+      <text class="text-secondary text-sm">发送消息开始聊天吧～</text>
+    </view>
+
+    <view
+      wx:for="{{messages}}"
+      wx:key="_id"
+      id="msg-{{index}}"
+      class="msg-item {{item.senderId === myId ? 'msg-right' : 'msg-left'}}"
+    >
+      <!-- 对方消息 -->
+      <block wx:if="{{item.senderId !== myId}}">
+        <image class="msg-avatar" src="{{otherUser.avatarUrl || '/assets/images/default-avatar.png'}}" />
+        <view class="msg-bubble msg-bubble-left">
+          <text class="msg-text">{{item.content}}</text>
+        </view>
+      </block>
+
+      <!-- 我的消息 -->
+      <block wx:if="{{item.senderId === myId}}">
+        <view class="msg-bubble msg-bubble-right">
+          <text class="msg-text">{{item.content}}</text>
+        </view>
+        <image class="msg-avatar" src="{{myInfo.avatarUrl || '/assets/images/default-avatar.png'}}" />
+      </block>
+    </view>
+    <view id="msg-bottom" style="height:20rpx;"></view>
+  </scroll-view>
+
+  <!-- 输入框 -->
+  <view class="input-bar">
+    <textarea
+      class="msg-input"
+      placeholder="发送消息..."
+      value="{{inputMsg}}"
+      bindinput="onMsgInput"
+      auto-height
+      maxlength="500"
+      adjust-position
+      confirm-type="send"
+      bindconfirm="sendMessage"
+    />
+    <button class="send-btn" bindtap="sendMessage" disabled="{{!inputMsg.trim()}}">发送</button>
+  </view>
+</view>

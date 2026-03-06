@@ -1,0 +1,9 @@
+{
+    "name": "getBooks",
+    "version": "1.0.0",
+    "description": "书籍搜索与筛选云函数",
+    "main": "index.js",
+    "dependencies": {
+        "wx-server-sdk": "~2.6.3"
+    }
+}

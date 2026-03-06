@@ -1,0 +1,26 @@
+<!-- pages/admin/users/users.wxml -->
+<view class="page-container">
+  <view wx:if="{{loading}}" class="loading-state"><text class="text-secondary">加载中...</text></view>
+  <view wx:elif="{{users.length > 0}}">
+    <view wx:for="{{users}}" wx:key="_id" class="user-card">
+      <view class="user-row" bindtap="viewProfile" data-id="{{item._id}}">
+        <image class="user-avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+        <view class="user-info">
+          <text class="user-name">{{item.nickName || '未命名'}}</text>
+          <text class="text-xs text-secondary">{{item.college || ''}} · 信用分: {{item.creditScore || 100}}</text>
+        </view>
+        <text wx:if="{{item.isBanned}}" class="tag tag-danger">已封禁</text>
+      </view>
+      <view class="admin-actions">
+        <button class="action-btn" bindtap="viewProfile" data-id="{{item._id}}">查看</button>
+        <button
+          class="action-btn {{item.isBanned ? 'btn-primary-sm' : 'btn-danger-sm'}}"
+          bindtap="toggleBan"
+          data-id="{{item._id}}"
+          data-banned="{{item.isBanned}}"
+        >{{item.isBanned ? '解封' : '封禁'}}</button>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="empty-state"><text class="text-secondary">暂无用户</text></view>
+</view>

@@ -1,0 +1,30 @@
+<!-- pages/admin/books/books.wxml -->
+<view class="page-container">
+  <view class="filter-bar">
+    <text class="filter-tab {{filterStatus === '' ? 'active' : ''}}" bindtap="filterChange" data-status="">全部</text>
+    <text class="filter-tab {{filterStatus === 'on_sale' ? 'active' : ''}}" bindtap="filterChange" data-status="on_sale">在售</text>
+    <text class="filter-tab {{filterStatus === 'withdrawn' ? 'active' : ''}}" bindtap="filterChange" data-status="withdrawn">已下架</text>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading-state"><text class="text-secondary">加载中...</text></view>
+
+  <view wx:elif="{{books.length > 0}}">
+    <view wx:for="{{books}}" wx:key="_id" class="admin-book-card">
+      <view class="book-row" bindtap="goDetail" data-id="{{item._id}}">
+        <image class="book-thumb" src="{{item.images[0]}}" mode="aspectFill" />
+        <view class="book-info">
+          <text class="book-title text-ellipsis">{{item.title}}</text>
+          <text class="text-sm text-secondary">{{item.author}} · ¥{{item.price}}</text>
+          <text class="text-xs text-secondary">{{item.college || '未知学院'}}</text>
+        </view>
+        <text class="status-dot" style="background:{{item.status === 'on_sale' ? '#67C23A' : item.status === 'withdrawn' ? '#F56C6C' : '#999'}}"></text>
+      </view>
+      <view class="admin-actions">
+        <button wx:if="{{item.status === 'on_sale'}}" class="action-btn btn-danger-sm" bindtap="withdrawBook" data-id="{{item._id}}">下架</button>
+        <button wx:if="{{item.status === 'withdrawn'}}" class="action-btn btn-primary-sm" bindtap="restoreBook" data-id="{{item._id}}">恢复上架</button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="empty-state"><text class="text-secondary">暂无书籍</text></view>
+</view>

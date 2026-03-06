@@ -1,0 +1,48 @@
+/* pages/admin/index/index.wxss */
+.admin-header {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+.admin-title {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+  margin-bottom: 30rpx;
+}
+.stat-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
+}
+.stat-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #4A90E2;
+  display: block;
+}
+.stat-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+  display: block;
+}
+.menu-section { display: flex; flex-direction: column; gap: 16rpx; }
+.menu-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx 24rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
+}
+.menu-icon { font-size: 48rpx; margin-right: 20rpx; }
+.menu-content { flex: 1; }
+.menu-title { font-size: 30rpx; font-weight: 500; display: block; }
+.menu-desc { margin-top: 4rpx; display: block; }
+.menu-arrow { font-size: 32rpx; color: #ccc; }

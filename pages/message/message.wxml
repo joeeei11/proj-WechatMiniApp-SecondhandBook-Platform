@@ -1,0 +1,36 @@
+<!-- pages/message/message.wxml - 消息列表页 -->
+<view class="page-container message-page">
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="spinner"></view>
+    <text class="text-secondary text-sm">加载中...</text>
+  </view>
+
+  <view wx:elif="{{conversations.length > 0}}" class="conv-list">
+    <view
+      wx:for="{{conversations}}"
+      wx:key="userId"
+      class="conv-item"
+      bindtap="goChat"
+      data-user-id="{{item.userId}}"
+      data-nick-name="{{item.nickName}}"
+    >
+      <view class="conv-avatar-wrap">
+        <image class="conv-avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+        <view wx:if="{{item.unread > 0}}" class="unread-badge badge-pulse">{{item.unread > 99 ? '99+' : item.unread}}</view>
+      </view>
+      <view class="conv-info">
+        <view class="conv-top flex-between">
+          <text class="conv-name text-ellipsis">{{item.nickName}}</text>
+          <text class="conv-time text-xs text-secondary">{{item.lastMsgTime}}</text>
+        </view>
+        <text class="conv-last-msg text-sm text-secondary text-ellipsis">{{item.lastMsgContent}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="empty-state">
+    <text class="empty-icon">💬</text>
+    <text class="text-secondary">暂无消息</text>
+    <text class="empty-hint text-xs text-secondary">去首页看看感兴趣的书籍吧</text>
+  </view>
+</view>

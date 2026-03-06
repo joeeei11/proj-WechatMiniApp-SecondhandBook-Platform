@@ -1,0 +1,108 @@
+<!-- pages/profile/profile.wxml - 个人主页 -->
+<view class="page">
+  <!-- 头部：头像 + 基本信息 -->
+  <view class="profile-header">
+    <image class="avatar-lg" src="{{userInfo.avatarUrl || '/assets/images/default-avatar.png'}}" />
+    <view class="user-info">
+      <text class="user-name">{{userInfo.nickName || '同学'}}</text>
+      <text class="user-desc text-sm">{{userInfo.college || ''}} {{userInfo.grade ? userInfo.grade + '级' : ''}}</text>
+      <view class="credit-badge">
+        <text class="stars">{{creditStars}}</text>
+        <text class="credit-score text-sm"> {{creditLevel.text}} · 信用分{{userInfo.creditScore}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 我的功能（仅自己主页） -->
+  <view wx:if="{{isSelf}}">
+    <!-- 数据统计 -->
+    <view class="stats-card">
+      <view class="stat-item" bindtap="goMyBooks">
+        <text class="stat-num">{{bookCount}}</text>
+        <text class="stat-label">在售书籍</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item" bindtap="goMyOrders">
+        <text class="stat-num">{{orderCount}}</text>
+        <text class="stat-label">交易记录</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-num">{{reviewCount}}</text>
+        <text class="stat-label">收到评价</text>
+      </view>
+    </view>
+
+    <!-- 功能菜单 -->
+    <view class="menu-card">
+      <view class="menu-item" bindtap="goMyBooks">
+        <text class="menu-icon">📚</text>
+        <text class="menu-text">我的发布</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goMyOrders">
+        <text class="menu-icon">📋</text>
+        <text class="menu-text">我的订单</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="editProfile">
+        <text class="menu-icon">✏️</text>
+        <text class="menu-text">编辑资料</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" wx:if="{{isAdmin}}" bindtap="goAdmin">
+        <text class="menu-icon">⚙️</text>
+        <text class="menu-text">管理员后台</text>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" style="border:none;" bindtap="logout">
+        <text class="menu-icon">🚪</text>
+        <text class="menu-text" style="color:var(--color-danger);">退出登录</text>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 对方主页：展示在售书籍和评价 -->
+  <view wx:else>
+    <view class="section-header">
+      <text class="section-title">TA的书籍</text>
+    </view>
+    <view class="books-list" wx:if="{{otherBooks.length > 0}}">
+      <view
+        wx:for="{{otherBooks}}"
+        wx:key="_id"
+        class="book-list-item"
+        bindtap="goBookDetail"
+        data-id="{{item._id}}"
+      >
+        <image class="book-list-img" src="{{item.coverImage || '/assets/images/book-placeholder.png'}}" mode="aspectFill" />
+        <view class="book-list-info">
+          <text class="book-list-title text-ellipsis">{{item.title}}</text>
+          <text class="text-secondary text-sm">{{conditionMap[item.condition]}}</text>
+        </view>
+        <text class="price text-sm">¥{{item.price}}</text>
+      </view>
+    </view>
+    <view class="empty-state" wx:else>
+      <text class="text-secondary text-sm">暂无在售书籍</text>
+    </view>
+  </view>
+
+  <!-- 评价列表 -->
+  <view class="section-header">
+    <text class="section-title">{{isSelf ? '收到的评价' : 'TA的评价'}}</text>
+  </view>
+  <view class="reviews-list">
+    <view wx:for="{{reviews}}" wx:key="_id" class="review-item">
+      <view class="review-header flex-between">
+        <text class="review-stars">{{item.stars}}</text>
+        <text class="review-time text-xs text-secondary">{{item.createTimeStr}}</text>
+      </view>
+      <text class="review-content text-sm">{{item.content || '好评！'}}</text>
+    </view>
+    <view class="empty-state" wx:if="{{reviews.length === 0}}">
+      <text class="text-secondary text-sm">暂无评价</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,371 @@
+/* pages/profile/profile.wxss */
+
+.page {
+  background: var(--color-bg);
+  min-height: 100vh;
+  padding-bottom: 60rpx;
+}
+
+/* 用户信息头部 */
+.profile-header {
+  background: linear-gradient(160deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  padding: 60rpx 40rpx 80rpx;
+  color: var(--color-white);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 30rpx;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-desc {
+  color: rgba(255,255,255,0.8);
+  display: block;
+  margin-top: 6rpx;
+}
+
+.user-name {
+  font-size: 38rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.user-college {
+  font-size: var(--font-size-sm);
+  opacity: 0.85;
+}
+
+/* 信用分 */
+.credit-badge {
+  margin-top: 12rpx;
+  display: inline-flex;
+  align-items: center;
+  gap: 8rpx;
+  background: rgba(255,255,255,0.2);
+  border-radius: var(--border-radius-full);
+  padding: 6rpx 18rpx;
+  font-size: var(--font-size-xs);
+}
+
+.credit-stars {
+  font-size: var(--font-size-md);
+  letter-spacing: 2rpx;
+}
+
+/* 统计卡片 */
+.stats-card {
+  margin: -40rpx 30rpx 0;
+  background: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  z-index: 2;
+}
+
+.stat-item {
+  text-align: center;
+  transition: transform 0.2s;
+}
+.stat-item:active {
+  transform: scale(0.95);
+}
+
+.stat-divider {
+  width: 1rpx;
+  height: 60rpx;
+  background: var(--color-border);
+}
+
+.stat-num {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: var(--color-primary);
+  display: block;
+}
+
+.stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-placeholder);
+  margin-top: 8rpx;
+  display: block;
+}
+
+/* 功能菜单 */
+.menu-card {
+  background: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  margin: 30rpx;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid var(--color-border-light);
+  transition: background 0.15s;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:active {
+  background: var(--color-bg);
+}
+
+.menu-icon {
+  font-size: 36rpx;
+  margin-right: 20rpx;
+  width: 50rpx;
+  text-align: center;
+}
+
+.menu-text {
+  flex: 1;
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+}
+
+.menu-arrow {
+  font-size: 28rpx;
+  color: var(--color-text-placeholder);
+}
+
+/* 通用 section 标题 */
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: var(--color-text);
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.section-header {
+  padding: 20rpx 30rpx 0;
+}
+
+/* 书籍列表（他人主页） */
+.books-list {
+  padding: 0 30rpx;
+}
+
+.book-list-item {
+  display: flex;
+  align-items: center;
+  background: var(--color-white);
+  border-radius: var(--border-radius-md);
+  padding: 16rpx;
+  margin-bottom: 16rpx;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s;
+}
+.book-list-item:active {
+  transform: scale(0.98);
+}
+
+.book-list-img {
+  width: 100rpx;
+  height: 130rpx;
+  border-radius: var(--border-radius-sm);
+  margin-right: 20rpx;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+.book-list-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.book-list-title {
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 评价列表 */
+.reviews-list {
+  padding: 0 30rpx 40rpx;
+}
+
+.review-item {
+  background: var(--color-white);
+  border-radius: var(--border-radius-md);
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: var(--shadow-sm);
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.review-avatar {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+}
+
+.review-name {
+  font-size: 26rpx;
+  font-weight: 500;
+}
+
+.review-time {
+  margin-left: auto;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-placeholder);
+}
+
+.review-stars {
+  color: var(--color-star);
+  font-size: 26rpx;
+  margin-bottom: 8rpx;
+}
+
+.review-content {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* 其他卖家书籍 */
+.other-books {
+  margin: 30rpx;
+}
+
+.book-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.book-grid-item {
+  width: calc(50% - 8rpx);
+  background: var(--color-white);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s;
+}
+.book-grid-item:active {
+  transform: scale(0.97);
+}
+
+.book-grid-img {
+  width: 100%;
+  height: 280rpx;
+}
+
+.book-grid-info {
+  padding: 16rpx;
+}
+
+.book-grid-title {
+  font-size: 26rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-grid-price {
+  color: var(--color-danger);
+  font-size: var(--font-size-md);
+  font-weight: bold;
+  margin-top: 8rpx;
+}
+
+/* 退出登录 */
+.logout-section {
+  margin: 40rpx 30rpx;
+}
+
+.logout-btn {
+  width: 100%;
+  height: 88rpx;
+  background: var(--color-white);
+  color: var(--color-danger);
+  border: none;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+}
+.logout-btn:active {
+  background: #fef0f0;
+  transform: scale(0.98);
+}
+.logout-btn::after { border: none; }
+
+/* 编辑按钮 */
+.edit-btn {
+  position: absolute;
+  top: 40rpx;
+  right: 30rpx;
+  padding: 10rpx 24rpx;
+  background: rgba(255,255,255,0.2);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-sm);
+  transition: background 0.2s;
+}
+.edit-btn:active {
+  background: rgba(255,255,255,0.35);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60rpx 0;
+}
+
+.profile-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255,255,255,0.6);
+}
+
+.user-info-section {
+  display: flex;
+  align-items: center;
+}
+
+.credit-section {
+  margin-top: 30rpx;
+  background: rgba(255,255,255,0.15);
+  border-radius: var(--border-radius-md);
+  padding: 20rpx 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.credit-label {
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+}
+
+.credit-score {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.menu-section {
+  margin: 30rpx;
+}

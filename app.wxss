@@ -1,0 +1,323 @@
+/* 全局样式 - 设计变量 */
+page {
+  /* 主色调 */
+  --color-primary: #4A90E2;
+  --color-primary-dark: #357ABD;
+  --color-primary-light: #eef5fd;
+  --color-secondary: #67C23A;
+  --color-danger: #F56C6C;
+  --color-warning: #E6A23C;
+  --color-star: #FFB800;
+
+  /* 文字颜色 */
+  --color-text: #333333;
+  --color-text-secondary: #666666;
+  --color-text-placeholder: #999999;
+
+  /* 背景 & 边框 */
+  --color-border: #E8E8E8;
+  --color-border-light: #f5f5f5;
+  --color-bg: #F5F6FA;
+  --color-bg-input: #F5F6FA;
+  --color-bg-chat: #F0F2F5;
+  --color-white: #ffffff;
+
+  /* 字体大小 */
+  --font-size-xl: 36rpx;
+  --font-size-lg: 32rpx;
+  --font-size-md: 28rpx;
+  --font-size-sm: 24rpx;
+  --font-size-xs: 22rpx;
+
+  /* 间距 */
+  --spacing-xs: 8rpx;
+  --spacing-sm: 12rpx;
+  --spacing-md: 20rpx;
+  --spacing-lg: 30rpx;
+  --spacing-xl: 40rpx;
+
+  /* 圆角 */
+  --border-radius-sm: 8rpx;
+  --border-radius-md: 16rpx;
+  --border-radius-lg: 24rpx;
+  --border-radius-full: 9999rpx;
+
+  /* 阴影 */
+  --shadow-sm: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4rpx 24rpx rgba(0, 0, 0, 0.10);
+
+  background-color: var(--color-bg);
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+}
+
+/* ========== 通用卡片 ========== */
+.card {
+  background: var(--color-white);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  transition: box-shadow 0.2s ease;
+}
+
+/* ========== 通用按钮 ========== */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: var(--color-white);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  padding: 20rpx 40rpx;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-primary:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+.btn-primary::after { border: none; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-md);
+  padding: 18rpx 40rpx;
+  border: 2rpx solid var(--color-primary);
+  text-align: center;
+  display: inline-block;
+  transition: all 0.2s;
+}
+.btn-outline:active {
+  background: var(--color-primary-light);
+  transform: scale(0.97);
+}
+.btn-outline::after { border: none; }
+
+.btn-danger {
+  background: var(--color-danger);
+  color: var(--color-white);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  padding: 20rpx 40rpx;
+  border: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-danger:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+.btn-danger::after { border: none; }
+
+/* ========== 价格标签 ========== */
+.price {
+  color: var(--color-danger);
+  font-weight: bold;
+  font-size: var(--font-size-lg);
+}
+
+.price-symbol {
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+}
+
+/* ========== 标签/Tag ========== */
+.tag {
+  display: inline-block;
+  padding: 4rpx 14rpx;
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-xs);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.tag-success {
+  background: #f0f9eb;
+  color: var(--color-secondary);
+}
+
+.tag-warning {
+  background: #fdf6ec;
+  color: var(--color-warning);
+}
+
+.tag-danger {
+  background: #fef0f0;
+  color: var(--color-danger);
+}
+
+/* ========== 分割线 ========== */
+.divider {
+  height: 1rpx;
+  background: var(--color-border);
+  margin: var(--spacing-md) 0;
+}
+
+/* ========== flex 布局工具类 ========== */
+.flex { display: flex; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-col { display: flex; flex-direction: column; }
+.flex-1 { flex: 1; }
+.flex-wrap { flex-wrap: wrap; }
+.align-center { align-items: center; }
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+
+/* ========== 文本工具类 ========== */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-primary { color: var(--color-primary); }
+.text-danger { color: var(--color-danger); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-xs { font-size: var(--font-size-xs); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-bold { font-weight: bold; }
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.text-ellipsis-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* ========== 间距工具类 ========== */
+.mt-xs { margin-top: var(--spacing-xs); }
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mr-sm { margin-right: var(--spacing-sm); }
+.mr-md { margin-right: var(--spacing-md); }
+.p-md { padding: var(--spacing-md); }
+.px-md { padding: 0 var(--spacing-md); }
+.py-md { padding: var(--spacing-md) 0; }
+
+/* ========== 页面容器 ========== */
+.page-container {
+  min-height: 100vh;
+  background: var(--color-bg);
+  padding: var(--spacing-md);
+  padding-bottom: 140rpx;
+}
+
+/* 安全区域底部 */
+.safe-bottom {
+  height: env(safe-area-inset-bottom);
+}
+
+/* ========== 固定底部操作栏 ========== */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-white);
+  padding: var(--spacing-md) var(--spacing-lg);
+  padding-bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom));
+  box-shadow: 0 -2rpx 12rpx rgba(0,0,0,0.06);
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+/* ========== 滚动容器 ========== */
+.scroll-view {
+  height: 100vh;
+}
+
+/* ========== 头像 ========== */
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: var(--color-border);
+}
+
+.avatar-lg {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+/* ========== 星级评分 ========== */
+.stars {
+  color: var(--color-star);
+  font-size: var(--font-size-md);
+  letter-spacing: 2rpx;
+}
+
+/* ========== 动画工具类 ========== */
+
+/* 渐入 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  animation: fadeIn 0.35s ease-out forwards;
+}
+
+/* 旋转加载 */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 脉冲 */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* 骨架屏闪烁 */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--border-radius-sm);
+}
+
+/* 可点击元素通用按压效果 */
+.pressable {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.pressable:active {
+  transform: scale(0.97);
+  opacity: 0.85;
+}
+
+/* 加载旋转器 */
+.spinner {
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+.spinner-sm {
+  width: 28rpx;
+  height: 28rpx;
+  border-width: 3rpx;
+}
+
+/* 未读红点脉冲 */
+.badge-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}

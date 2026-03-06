@@ -1,0 +1,94 @@
+<!-- pages/book-detail/book-detail.wxml - 书籍详情页 -->
+<view class="page">
+  <!-- 图片轮播 -->
+  <swiper
+    class="cover-swiper"
+    circular
+    indicator-dots
+    indicator-color="rgba(255,255,255,0.6)"
+    indicator-active-color="#fff"
+  >
+    <swiper-item wx:for="{{book.images}}" wx:key="*this">
+      <image class="cover-img" src="{{item}}" mode="aspectFit" bindtap="previewImage" data-index="{{index}}" />
+    </swiper-item>
+    <swiper-item wx:if="{{!book.images || book.images.length === 0}}">
+      <image class="cover-img" src="/assets/images/book-placeholder.png" mode="aspectFit" />
+    </swiper-item>
+  </swiper>
+
+  <!-- 基本信息卡片 -->
+  <view class="card info-card">
+    <view class="book-header flex-between">
+      <view class="price-wrap">
+        <text class="price-symbol">¥</text>
+        <text class="price">{{book.price}}</text>
+      </view>
+      <view class="tag">{{conditionMap[book.condition]}}</view>
+    </view>
+    <text class="book-title">{{book.title}}</text>
+    <view class="book-meta mt-sm">
+      <text class="text-secondary text-sm">{{book.author}} {{book.isbn ? '· ISBN: ' + book.isbn : ''}}</text>
+    </view>
+    <view class="info-row mt-md">
+      <text class="info-label">所属学院</text>
+      <text class="info-value">{{book.college || '未填写'}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">适用年级</text>
+      <text class="info-value">{{book.grade || '不限'}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">浏览次数</text>
+      <text class="info-value">{{book.viewCount || 0}} 次</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">发布时间</text>
+      <text class="info-value">{{publishTime}}</text>
+    </view>
+  </view>
+
+  <!-- 书籍描述 -->
+  <view class="card" wx:if="{{book.description}}">
+    <text class="section-title">卖家描述</text>
+    <text class="description mt-sm">{{book.description}}</text>
+  </view>
+
+  <!-- 卖家信息 -->
+  <view class="card seller-card" bindtap="goSellerProfile" wx:if="{{seller}}">
+    <text class="section-title">卖家信息</text>
+    <view class="seller-info mt-md">
+      <image class="avatar" src="{{seller.avatarUrl || '/assets/images/default-avatar.png'}}" />
+      <view class="seller-detail">
+        <text class="seller-name">{{seller.nickName || '匿名用户'}}</text>
+        <text class="seller-college text-secondary text-sm">{{seller.college}} · {{seller.grade}}级</text>
+        <view class="credit-row">
+          <text class="stars">{{creditStars}}</text>
+          <text class="credit-text text-sm"> 信用分 {{seller.creditScore}}</text>
+        </view>
+      </view>
+      <text class="arrow text-secondary">›</text>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="safe-bottom"></view>
+  <view class="bottom-bar" wx:if="{{!isMine}}">
+    <button class="btn-contact flex-1" bindtap="contactSeller">
+      💬 联系卖家
+    </button>
+    <button class="btn-buy flex-1" bindtap="createOrder" wx:if="{{book.status === 'on_sale'}}">
+      立即购买
+    </button>
+    <button class="btn-sold flex-1" disabled wx:else>
+      {{book.status === 'sold' ? '已售出' : '交易中'}}
+    </button>
+  </view>
+
+  <!-- 我的书籍操作 -->
+  <view class="bottom-bar" wx:if="{{isMine}}">
+    <button class="btn-outline flex-1" bindtap="editBook">编辑</button>
+    <button class="btn-danger flex-1" bindtap="withdrawBook" wx:if="{{book.status === 'on_sale'}}">
+      下架
+    </button>
+  </view>
+</view>

@@ -1,0 +1,108 @@
+<!-- pages/search/search.wxml - 搜索页 -->
+<view class="search-page">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrap {{inputFocus ? 'focus' : ''}}">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="搜索书名、作者、ISBN"
+        value="{{keyword}}"
+        bindinput="onInput"
+        bindconfirm="onConfirm"
+        bindfocus="onFocus"
+        bindblur="onBlur"
+        confirm-type="search"
+        focus
+      />
+    </view>
+    <text class="filter-btn" bindtap="toggleFilter">筛选</text>
+  </view>
+
+  <!-- 筛选面板 -->
+  <view class="filter-panel {{showFilter ? 'show' : ''}}">
+    <!-- 学院筛选 -->
+    <view class="filter-group">
+      <text class="filter-title">学院</text>
+      <view class="filter-tags">
+        <text
+          wx:for="{{colleges}}"
+          wx:key="*this"
+          class="filter-tag {{selectedCollege === item ? 'active' : ''}}"
+          bindtap="selectCollege"
+          data-value="{{item}}"
+        >{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 成色筛选 -->
+    <view class="filter-group">
+      <text class="filter-title">书籍成色</text>
+      <view class="filter-tags">
+        <text
+          wx:for="{{conditions}}"
+          wx:key="value"
+          class="filter-tag {{selectedCondition === item.value ? 'active' : ''}}"
+          bindtap="selectCondition"
+          data-value="{{item.value}}"
+        >{{item.label}}</text>
+      </view>
+    </view>
+
+    <!-- 价格筛选 -->
+    <view class="filter-group">
+      <text class="filter-title">价格区间</text>
+      <view class="filter-tags">
+        <text
+          wx:for="{{priceRange}}"
+          wx:key="value"
+          class="filter-tag {{selectedPrice === item.value ? 'active' : ''}}"
+          bindtap="selectPrice"
+          data-value="{{item.value}}"
+        >{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="filter-actions">
+      <button class="btn-outline" bindtap="resetFilter">重置</button>
+      <button class="btn-primary" bindtap="confirmFilter">确认筛选</button>
+    </view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view class="results-section" wx:if="{{searched}}">
+    <text class="results-count" wx:if="{{!loading}}">共找到 {{results.length}} 本书</text>
+
+    <view wx:if="{{loading}}" class="loading-state">
+      <view class="spinner"></view>
+      <text class="text-sm">搜索中...</text>
+    </view>
+
+    <view wx:elif="{{results.length > 0}}" class="results-list">
+      <view
+        wx:for="{{results}}"
+        wx:key="_id"
+        class="result-item"
+        bindtap="goBookDetail"
+        data-id="{{item._id}}"
+      >
+        <image class="result-img" src="{{item.images[0] || item.coverImage || '/assets/images/book-placeholder.png'}}" mode="aspectFill" />
+        <view class="result-info">
+          <text class="result-title text-ellipsis">{{item.title}}</text>
+          <text class="result-author text-sm text-secondary">{{item.author}}</text>
+          <view class="result-meta">
+            <text class="tag">{{conditionMap[item.condition] || item.condition}}</text>
+            <text class="result-college text-xs text-secondary" wx:if="{{item.college}}">{{item.college}}</text>
+          </view>
+          <text class="price">¥{{item.price}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="empty-state">
+      <text class="empty-icon">📚</text>
+      <text class="text-secondary">没有找到相关书籍</text>
+      <text class="text-xs text-secondary mt-sm">试试换个关键词搜索？</text>
+    </view>
+  </view>
+</view>

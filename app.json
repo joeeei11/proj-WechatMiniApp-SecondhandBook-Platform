@@ -1,0 +1,68 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/search/search",
+        "pages/book-detail/book-detail",
+        "pages/publish/publish",
+        "pages/edit-book/edit-book",
+        "pages/message/message",
+        "pages/chat/chat",
+        "pages/order/order",
+        "pages/profile/profile",
+        "pages/my-books/my-books",
+        "pages/my-orders/my-orders",
+        "pages/review/review",
+        "pages/login/login",
+        "pages/admin/index/index",
+        "pages/admin/books/books",
+        "pages/admin/users/users",
+        "pages/admin/stats/stats"
+    ],
+    "tabBar": {
+        "color": "#999999",
+        "selectedColor": "#4A90E2",
+        "backgroundColor": "#ffffff",
+        "borderStyle": "black",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "assets/icons/home.png",
+                "selectedIconPath": "assets/icons/home-active.png"
+            },
+            {
+                "pagePath": "pages/publish/publish",
+                "text": "发布",
+                "iconPath": "assets/icons/publish.png",
+                "selectedIconPath": "assets/icons/publish-active.png"
+            },
+            {
+                "pagePath": "pages/message/message",
+                "text": "消息",
+                "iconPath": "assets/icons/message.png",
+                "selectedIconPath": "assets/icons/message-active.png"
+            },
+            {
+                "pagePath": "pages/profile/profile",
+                "text": "我的",
+                "iconPath": "assets/icons/profile.png",
+                "selectedIconPath": "assets/icons/profile-active.png"
+            }
+        ]
+    },
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#4A90E2",
+        "navigationBarTitleText": "校园书局",
+        "navigationBarTextStyle": "white"
+    },
+    "permission": {
+        "scope.userLocation": {
+            "desc": "用于展示附近书籍"
+        }
+    },
+    "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents",
+    "cloud": true,
+    "usingComponents": {}
+}

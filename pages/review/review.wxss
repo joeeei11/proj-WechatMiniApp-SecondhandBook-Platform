@@ -1,0 +1,107 @@
+/* pages/review/review.wxss */
+.review-page {
+  padding-bottom: 200rpx;
+}
+
+.reviewee-card .reviewee-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  background: var(--color-border);
+}
+
+.reviewee-name {
+  font-size: 30rpx;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.section-title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+/* 星级评分 */
+.star-rating {
+  display: flex;
+  gap: 20rpx;
+  justify-content: center;
+  margin: 20rpx 0;
+}
+
+.star {
+  font-size: 60rpx;
+  color: var(--color-border);
+  transition: all 0.25s ease;
+}
+
+.star-active {
+  color: var(--color-star);
+  transform: scale(1.2);
+}
+
+.rating-text {
+  text-align: center;
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: 8rpx;
+}
+
+/* 评价文本域 */
+.review-textarea {
+  width: 100%;
+  height: 200rpx;
+  padding: 20rpx;
+  background: var(--color-bg-input);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+  border: 2rpx solid transparent;
+  transition: all 0.2s;
+}
+
+.review-textarea:focus {
+  border-color: var(--color-primary);
+  background: var(--color-white);
+}
+
+.char-count {
+  text-align: right;
+  display: block;
+  margin-top: 10rpx;
+}
+
+/* 提交按钮 */
+.submit-btn {
+  position: fixed;
+  bottom: 40rpx;
+  left: 40rpx;
+  right: 40rpx;
+  width: auto;
+  height: 92rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: var(--color-white);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(74, 144, 226, 0.35);
+  transition: all 0.2s;
+}
+.submit-btn:active {
+  transform: scale(0.97);
+}
+.submit-btn::after { border: none; }
+.submit-btn[disabled] {
+  opacity: 0.6;
+  box-shadow: none;
+}

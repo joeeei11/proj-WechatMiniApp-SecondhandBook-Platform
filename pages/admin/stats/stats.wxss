@@ -1,0 +1,23 @@
+/* pages/admin/stats/stats.wxss */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16rpx; margin-bottom: 30rpx; }
+.stat-card { background: #fff; border-radius: 16rpx; padding: 30rpx; text-align: center; box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04); }
+.stat-card.highlight { background: linear-gradient(135deg, #4A90E2, #357ABD); }
+.stat-card.highlight .stat-value, .stat-card.highlight .stat-label { color: #fff; }
+.stat-value { font-size: 48rpx; font-weight: bold; color: #4A90E2; display: block; }
+.stat-label { font-size: 24rpx; color: #999; margin-top: 8rpx; display: block; }
+.section { margin-bottom: 20rpx; }
+.section-title { font-size: 30rpx; font-weight: 600; margin-bottom: 20rpx; display: block; }
+.rank-item { display: flex; align-items: center; padding: 16rpx 0; border-bottom: 1rpx solid #f5f5f5; }
+.rank-item:last-child { border-bottom: none; }
+.rank-num { width: 48rpx; height: 48rpx; border-radius: 50%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 24rpx; font-weight: bold; color: #666; margin-right: 16rpx; flex-shrink: 0; }
+.rank-item:nth-child(1) .rank-num { background: #FFD700; color: #fff; }
+.rank-item:nth-child(2) .rank-num { background: #C0C0C0; color: #fff; }
+.rank-item:nth-child(3) .rank-num { background: #CD7F32; color: #fff; }
+.rank-title { flex: 1; font-size: 26rpx; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rank-count { flex-shrink: 0; margin-left: 12rpx; }
+.order-row { display: flex; align-items: center; justify-content: space-between; padding: 16rpx 0; border-bottom: 1rpx solid #f5f5f5; }
+.order-row:last-child { border-bottom: none; }
+.order-id { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 300rpx; }
+.order-status { font-size: 24rpx; font-weight: 500; }
+.order-price { font-size: 26rpx; }
+.loading-state { text-align: center; padding: 100rpx 0; }

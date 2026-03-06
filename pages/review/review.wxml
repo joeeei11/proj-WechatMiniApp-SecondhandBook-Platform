@@ -1,0 +1,50 @@
+<!-- pages/review/review.wxml - 发表评价 -->
+<view class="page-container review-page">
+  <!-- 被评价者信息 -->
+  <view class="reviewee-card card" wx:if="{{revieweeInfo}}">
+    <view class="flex align-center">
+      <image class="reviewee-avatar" src="{{revieweeInfo.avatarUrl}}" mode="aspectFill" />
+      <view>
+        <text class="reviewee-name">{{revieweeInfo.nickName}}</text>
+        <text class="text-sm text-secondary">{{revieweeInfo.college || ''}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 评分 -->
+  <view class="rating-card card">
+    <text class="section-title">评分</text>
+    <view class="star-rating">
+      <text
+        wx:for="{{[1,2,3,4,5]}}"
+        wx:key="*this"
+        class="star {{score >= item ? 'star-active' : ''}}"
+        bindtap="setScore"
+        data-score="{{item}}"
+      >{{score >= item ? '★' : '☆'}}</text>
+    </view>
+    <text class="rating-text text-sm text-secondary">
+      {{score === 5 ? '非常满意' : score === 4 ? '满意' : score === 3 ? '一般' : score === 2 ? '不满意' : '非常不满意'}}
+    </text>
+  </view>
+
+  <!-- 评价内容 -->
+  <view class="content-card card">
+    <text class="section-title">评价内容</text>
+    <textarea
+      class="review-textarea"
+      placeholder="请说说您的交易体验..."
+      value="{{content}}"
+      bindinput="onContentInput"
+      maxlength="200"
+    />
+    <text class="char-count text-xs text-secondary">{{content.length}}/200</text>
+  </view>
+
+  <!-- 提交按钮 -->
+  <button
+    class="submit-btn btn-primary"
+    bindtap="submitReview"
+    disabled="{{submitting}}"
+  >{{submitting ? '提交中...' : '提交评价'}}</button>
+</view>

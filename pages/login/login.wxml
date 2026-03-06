@@ -1,0 +1,63 @@
+<!-- pages/login/login.wxml - 登录/完善资料页 -->
+<view class="page-container">
+  <view class="login-header">
+    <image class="logo" src="/assets/images/logo.png" />
+    <text class="app-title">校园书局</text>
+    <text class="app-subtitle">专属湘大的二手书交易平台</text>
+  </view>
+
+  <!-- 授权头像 -->
+  <view class="card avatar-section">
+    <text class="section-title">头像与昵称</text>
+    <view class="avatar-wrap mt-md" bindtap="chooseAvatar">
+      <image class="avatar-preview" src="{{form.avatarUrl || '/assets/images/default-avatar.png'}}" />
+      <view class="avatar-edit-btn">✏️</view>
+    </view>
+    <view class="form-item mt-md">
+      <input
+        class="form-input"
+        placeholder="请输入昵称"
+        value="{{form.nickName}}"
+        bindinput="onInput"
+        data-field="nickName"
+        maxlength="20"
+      />
+    </view>
+  </view>
+
+  <!-- 学院信息 -->
+  <view class="card">
+    <text class="section-title">学院信息 <text class="text-secondary text-sm">（可选，用于精准推荐）</text></text>
+    <view class="form-item mt-md">
+      <picker mode="selector" range="{{colleges}}" bindchange="selectCollege">
+        <view class="picker-view">
+          <text class="{{form.college ? '' : 'text-secondary'}}">{{form.college || '选择学院'}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <picker mode="selector" range="{{grades}}" bindchange="selectGrade">
+        <view class="picker-view">
+          <text class="{{form.grade ? '' : 'text-secondary'}}">{{form.grade ? form.grade+'级' : '选择年级'}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-item" style="border:none;">
+      <input
+        class="form-input"
+        placeholder="手机号（可选）"
+        value="{{form.phone}}"
+        bindinput="onInput"
+        data-field="phone"
+        type="number"
+        maxlength="11"
+      />
+    </view>
+  </view>
+
+  <button class="submit-btn" bindtap="saveProfile" disabled="{{saving}}">
+    {{saving ? '保存中...' : '保存并进入'}}
+  </button>
+</view>

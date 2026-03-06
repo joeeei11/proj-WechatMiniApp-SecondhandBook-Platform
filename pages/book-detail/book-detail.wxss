@@ -1,0 +1,244 @@
+/* pages/book-detail/book-detail.wxss */
+
+.page {
+  background: var(--color-bg);
+  min-height: 100vh;
+  padding-bottom: 160rpx;
+}
+
+/* 轮播图 */
+.cover-swiper {
+  width: 100%;
+  height: 500rpx;
+  background: var(--color-bg);
+}
+
+.cover-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* 信息卡片 */
+.info-card {
+  margin: 20rpx 24rpx 0;
+}
+
+.card {
+  background: var(--color-white);
+  border-radius: var(--border-radius-md);
+  padding: 30rpx;
+  margin: 0 24rpx 20rpx;
+}
+
+.book-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 4rpx;
+}
+
+.price-symbol {
+  font-size: 28rpx;
+  color: var(--color-danger);
+  font-weight: bold;
+}
+
+.price {
+  font-size: 52rpx;
+  color: var(--color-danger);
+  font-weight: bold;
+}
+
+.book-title {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  color: var(--color-text);
+  line-height: 1.5;
+  display: block;
+}
+
+/* 信息行 */
+.info-row {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid var(--color-border-light);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  width: 140rpx;
+  flex-shrink: 0;
+}
+
+.info-value {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  flex: 1;
+}
+
+/* 描述 */
+.section-title {
+  font-size: var(--font-size-md);
+  font-weight: bold;
+  color: var(--color-text);
+  display: block;
+}
+
+.description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  display: block;
+}
+
+/* 卖家信息 */
+.seller-card {
+  transition: transform 0.2s;
+}
+.seller-card:active {
+  transform: scale(0.98);
+}
+
+.seller-info {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.avatar {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--color-border);
+}
+
+.seller-detail {
+  flex: 1;
+}
+
+.seller-name {
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: var(--color-text);
+  display: block;
+}
+
+.seller-college {
+  display: block;
+  margin: 6rpx 0;
+}
+
+.credit-row {
+  display: flex;
+  align-items: center;
+}
+
+.stars {
+  color: var(--color-star);
+  font-size: var(--font-size-sm);
+}
+
+.credit-text {
+  color: var(--color-text-secondary);
+}
+
+.arrow {
+  font-size: 40rpx;
+  color: var(--color-text-placeholder);
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-white);
+  padding: 20rpx 24rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 20rpx rgba(0,0,0,0.08);
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn-contact {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  border: none;
+  padding: 0 30rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  transition: all 0.2s;
+}
+.btn-contact:active { opacity: 0.85; transform: scale(0.97); }
+.btn-contact::after { border: none; }
+
+.btn-buy {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-md);
+  font-weight: bold;
+  border: none;
+  padding: 0 30rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  transition: all 0.2s;
+}
+.btn-buy:active { opacity: 0.9; transform: scale(0.97); }
+.btn-buy::after { border: none; }
+
+.btn-sold {
+  background: var(--color-border);
+  color: var(--color-text-placeholder);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-md);
+  border: none;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+.btn-sold::after { border: none; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2rpx solid var(--color-primary);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-md);
+  height: 88rpx;
+  line-height: 88rpx;
+  transition: all 0.2s;
+}
+.btn-outline:active { background: var(--color-primary-light); }
+.btn-outline::after { border: none; }
+
+.btn-danger {
+  background: var(--color-danger);
+  color: white;
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-md);
+  border: none;
+  height: 88rpx;
+  line-height: 88rpx;
+  transition: all 0.2s;
+}
+.btn-danger:active { opacity: 0.9; transform: scale(0.97); }
+.btn-danger::after { border: none; }
+
+.flex-1 { flex: 1; }
