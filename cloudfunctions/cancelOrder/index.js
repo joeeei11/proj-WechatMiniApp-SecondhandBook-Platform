@@ -26,7 +26,7 @@ exports.main = async (event, context) => {
             return { success: false, error: '无权操作此订单' }
         }
 
-        if (order.status !== 'pending') {
+        if (order.status !== 'pending' && order.status !== 'pending_payment') {
             return { success: false, error: '当前订单状态不可取消' }
         }
 

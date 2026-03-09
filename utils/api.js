@@ -127,6 +127,13 @@ const orderAPI = {
         })
     },
 
+    // 模拟支付：将订单状态从 pending_payment 更新为 pending（买家是订单创建者，有写权限）
+    payOrder: (orderId) => {
+        return wx.cloud.database().collection('orders').doc(orderId).update({
+            data: { status: 'pending', updateTime: wx.cloud.database().serverDate() }
+        })
+    },
+
     // 取消订单（云函数方式，同时恢复书籍状态为在售）
     cancelOrder: (orderId) => callCloud('cancelOrder', { orderId }),
 

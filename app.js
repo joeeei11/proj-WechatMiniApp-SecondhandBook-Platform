@@ -100,6 +100,6 @@ App({
     this.globalData.isAdmin = false
     wx.removeStorageSync('userInfo')
     wx.removeStorageSync('openid')
-    wx.reLaunch({ url: '/pages/login/login' })
+    wx.reLaunch({ url: '/pages/login/login?logout=1' })
   }
 })

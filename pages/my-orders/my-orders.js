@@ -63,6 +63,30 @@ Page({
         wx.navigateTo({ url: `/pages/chat/chat?userId=${buyerId}&bookId=${bookId}` })
     },
 
+    async payOrder(e) {
+        const { orderId, price } = e.currentTarget.dataset
+        const payRes = await wx.showModal({
+            title: '微信支付',
+            content: `支付金额  ¥${Number(price).toFixed(2)}\n\n收款方：湘潭大学校园二手书平台`,
+            confirmText: '确认支付',
+            cancelText: '取消'
+        })
+        if (!payRes.confirm) return
+
+        wx.showLoading({ title: '支付中...' })
+        setTimeout(async () => {
+            try {
+                await orderAPI.payOrder(orderId)
+                wx.hideLoading()
+                wx.showToast({ title: '支付成功！', icon: 'success' })
+                this.loadOrders()
+            } catch (e) {
+                wx.hideLoading()
+                wx.showToast({ title: '支付失败，请稍后重试', icon: 'error' })
+            }
+        }, 1500)
+    },
+
     async cancelOrder(e) {
         const res = await wx.showModal({ title: '确认取消', content: '确定取消此订单？取消后书籍将重新上架', confirmColor: '#F56C6C' })
         if (!res.confirm) return

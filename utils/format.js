@@ -49,6 +49,7 @@ const formatCondition = (condition) => CONDITION_MAP[condition] || condition
  * 订单状态格式化
  */
 const ORDER_STATUS_MAP = {
+    'pending_payment': { text: '待支付', color: '#F56C6C' },
     'pending': { text: '待卖家确认', color: '#E6A23C' },
     'confirmed': { text: '待买家收货', color: '#4A90E2' },
     'completed': { text: '已完成', color: '#67C23A' },

@@ -20,8 +20,8 @@ Page({
                 const u = app.globalData.userInfo
                 this.setData({ form: { avatarUrl: u.avatarUrl || '', nickName: u.nickName || '', college: u.college || '', grade: u.grade || '', phone: u.phone || '' } })
             }
-        } else {
-            // 尝试自动登录
+        } else if (!options.logout) {
+            // 尝试自动登录（非退出登录触发的情况）
             wx.showLoading({ title: '登录中...' })
             const app = getApp()
             try {

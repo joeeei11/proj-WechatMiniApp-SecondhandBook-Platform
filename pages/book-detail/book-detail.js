@@ -101,30 +101,62 @@ Page({
 
         const result = await wx.showModal({
             title: '确认购买',
-            content: `《${book.title}》￥${book.price}\n确认后将通知卖家`,
-            confirmText: '确认购买'
+            content: `《${book.title}》\n定价：¥${book.price}\n\n确认后进入支付页面`,
+            confirmText: '去支付'
         })
         if (!result.confirm) return
 
-        wx.showLoading({ title: '提交中...' })
+        wx.showLoading({ title: '下单中...' })
+        let orderId = null
         try {
             const res = await orderAPI.createOrder({
                 bookId: bookId,
                 sellerId: book.sellerId,
                 price: Number(book.price)
             })
-            if (res.success) {
-                wx.showToast({ title: '已发送购买意向！' })
-                // 跳转到订单详情
-                setTimeout(() => {
-                    wx.navigateTo({ url: `/pages/order/order?id=${res.orderId}` })
-                }, 1500)
-            } else {
-                wx.showToast({ title: res.error || '操作失败', icon: 'error' })
-            }
-        } finally {
             wx.hideLoading()
+            if (!res.success) {
+                wx.showToast({ title: res.error || '下单失败', icon: 'error' })
+                return
+            }
+            orderId = res.orderId
+        } catch (e) {
+            wx.hideLoading()
+            wx.showToast({ title: '下单失败', icon: 'error' })
+            return
         }
+
+        // 拉起模拟支付
+        await this.mockPay(orderId, book)
+    },
+
+    // 模拟微信支付流程
+    async mockPay(orderId, book) {
+        const payRes = await wx.showModal({
+            title: '微信支付',
+            content: `支付金额  ¥${Number(book.price).toFixed(2)}\n\n收款方：湘潭大学校园二手书平台`,
+            confirmText: '确认支付',
+            cancelText: '暂不支付'
+        })
+
+        if (!payRes.confirm) {
+            wx.showToast({ title: '可在"我的订单"中继续支付', icon: 'none', duration: 2500 })
+            setTimeout(() => wx.switchTab({ url: '/pages/order/order' }), 1500)
+            return
+        }
+
+        wx.showLoading({ title: '支付中...' })
+        setTimeout(async () => {
+            try {
+                await orderAPI.payOrder(orderId)
+                wx.hideLoading()
+                wx.showToast({ title: '支付成功！', icon: 'success' })
+                setTimeout(() => wx.switchTab({ url: '/pages/order/order' }), 1500)
+            } catch (e) {
+                wx.hideLoading()
+                wx.showToast({ title: '支付失败，请稍后重试', icon: 'error' })
+            }
+        }, 1500)
     },
 
     // 查看卖家主页

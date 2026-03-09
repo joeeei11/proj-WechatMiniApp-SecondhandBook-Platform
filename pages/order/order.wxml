@@ -52,10 +52,17 @@
             联系卖家
           </button>
           <button
+            class="action-btn btn-primary-sm"
+            bindtap="payOrder"
+            data-order-id="{{item._id}}"
+            data-price="{{item.price}}"
+            wx:if="{{item.status === 'pending_payment'}}"
+          >立即支付</button>
+          <button
             class="action-btn btn-danger-sm"
             bindtap="cancelOrder"
             data-order-id="{{item._id}}"
-            wx:if="{{item.status === 'pending'}}"
+            wx:if="{{item.status === 'pending_payment' || item.status === 'pending'}}"
           >取消订单</button>
           <button
             class="action-btn btn-primary-sm"
@@ -78,6 +85,7 @@
           <button class="action-btn" bindtap="contactBuyer" data-buyer-id="{{item.buyerId}}" data-book-id="{{item.bookId}}">
             联系买家
           </button>
+          <text class="text-xs text-secondary" wx:if="{{item.status === 'pending_payment'}}">等待买家付款</text>
           <button
             class="action-btn btn-primary-sm"
             bindtap="confirmSell"

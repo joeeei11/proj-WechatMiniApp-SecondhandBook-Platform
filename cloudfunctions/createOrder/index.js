@@ -30,7 +30,7 @@ exports.main = async (event, context) => {
             buyerId,
             sellerId,
             price,
-            status: 'pending', // pending / confirmed / completed / cancelled
+            status: 'pending_payment', // pending_payment / pending / confirmed / completed / cancelled
             createTime: db.serverDate(),
             updateTime: db.serverDate()
         }
